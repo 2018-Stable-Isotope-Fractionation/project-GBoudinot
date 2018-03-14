@@ -247,36 +247,44 @@ div.tocify {
 <h1>Setting up our model</h1>
 <div id="heres-the-equations-in-full" class="section level2">
 <h2>Here’s the equations in full:</h2>
-<ul>
-<li><span class="math inline">\(\delta^{15}N_p = \delta^{15}N_d + \epsilon_{premin} + (J_{ox}/J_{dremin})(\epsilon_{ass} - \epsilon_{ox})\)</span></li>
-<li><span class="math inline">\(\delta^{15}N_{sed} = D * \delta^{15}N_d + (1-D) * \delta^{15}N_p\)</span></li>
-</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\delta^{15}N_p &amp;= \delta^{15}N_d + \epsilon_{premin} + (J_{ox}/J_{dremin})(\epsilon_{ass} - \epsilon_{ox}) \\
+\delta^{15}N_{sed} &amp;= D * \delta^{15}N_d + (1-D) * \delta^{15}N_p
+\end{aligned}
+\]</span></p>
 <p>With parameters:</p>
-<ul>
-<li><span class="math inline">\(r = J_{ass}/J_{premin}\)</span></li>
-<li><span class="math inline">\(D = J_{dbury}/(J_{dbury} + J_{pbury})\)</span></li>
-<li><span class="math inline">\(f_{ox} = J_{ox}/(J_{ass}+J_{ox})\)</span></li>
-</ul>
+<p><span class="math display">\[
+\begin{aligned}
+r &amp;= J_{ass}/J_{premin} \\
+D &amp;= J_{dbury}/(J_{dbury} + J_{pbury}) \\
+f_{ox} &amp;= J_{ox}/(J_{ass}+J_{ox})
+\end{aligned}
+\]</span></p>
 <p>And individual fluxes:</p>
-<ul>
-<li><span class="math inline">\(k = ((D-1)/(((1-f_{ox})/f_{ox})*(r-1)-1+D))\)</span></li>
-<li><span class="math inline">\(J_{dbury} = J_{in}*(1-k)*D\)</span></li>
-<li><span class="math inline">\(J_{pbury} = J_{in}*(1-k)*(1-D)\)</span></li>
-<li><span class="math inline">\(J_{dremin} = J_{in}*(1-(1-k)*D)\)</span></li>
-<li><span class="math inline">\(J_{ass} = J_{in}*k*((1-f_{ox})/f_{ox})\)</span></li>
-<li><span class="math inline">\(J_{premin} = r*(J_{in}*k*((1-f_{ox})/f_{ox}))\)</span></li>
-<li><span class="math inline">\(J_{ox} = J_{in}*k\)</span></li>
-</ul>
+<p><span class="math display">\[
+\begin{aligned}
+k &amp;= ((D-1)/(((1-f_{ox})/f_{ox})*(r-1)-1+D)) \\
+J_{dbury} &amp;= J_{in}*(1-k)*D \\
+J_{pbury} &amp;= J_{in}*(1-k)*(1-D) \\
+J_{dremin} &amp;= J_{in}*(1-(1-k)*D) \\
+J_{ass} &amp;= J_{in}*k*((1-f_{ox})/f_{ox}) \\
+J_{premin} &amp;= r*(J_{in}*k*((1-f_{ox})/f_{ox})) \\
+J_{ox} &amp;= J_{in}*k
+\end{aligned}
+\]</span></p>
 </div>
 <div id="default-values-from-paper" class="section level2">
 <h2>Default values (from paper)</h2>
-<ul>
-<li><span class="math inline">\(D = 0.2\)</span></li>
-<li><span class="math inline">\(r = 0.8\)</span></li>
-<li><span class="math inline">\(\epsilon_{ass} = -27\)</span></li>
-<li><span class="math inline">\(\epsilon_{ox} = -22\)</span></li>
-<li><span class="math inline">\(\delta^{15}N_d = -1\)</span></li>
-</ul>
+<p><span class="math display">\[
+\begin{aligned}
+D &amp;= 0.2 \\
+r &amp;= 0.8 \\
+\epsilon_{ass} &amp;= -27 \\
+\epsilon_{ox} &amp;= -22 \\
+\delta^{15}N_d &amp;= -1
+\end{aligned}
+\]</span></p>
 </div>
 </div>
 <div id="lets-see-this-in-image-form" class="section level1">
@@ -303,7 +311,7 @@ data1 &lt;- expand.grid(
   )
 
 # show the data
-data1 %&gt;% head() %&gt;% knitr::kable()</code></pre>
+data1</code></pre>
 <div id="visualize" class="section level2">
 <h2>Visualize</h2>
 <pre class="r"><code># base plot
@@ -364,7 +372,7 @@ data3 &lt;- expand.grid(
     delta_sed = delta_diazotrophs + (1-D)*f_ox / (f_ox + (1-f_ox) * (1-r)) * (eps_ass - eps_ox)
   )
 
-data3 %&gt;% head() %&gt;% knitr::kable()</code></pre>
+data3</code></pre>
 <div id="resulting-contour-plot" class="section level2">
 <h2>Resulting contour plot</h2>
 <pre class="r"><code># funky plot

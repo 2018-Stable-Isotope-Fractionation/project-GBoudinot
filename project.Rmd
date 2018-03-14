@@ -16,7 +16,6 @@ editor_options:
 
 ```{r "load packages", include=FALSE}
 library(tidyverse)
-knitr::opts_chunk$set(eval = FALSE)
 ```
 
 # Setting up our model
@@ -24,33 +23,49 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Here's the equations in full:
 
- - $\delta^{15}N_p = \delta^{15}N_d + \epsilon_{premin} + (J_{ox}/J_{dremin})(\epsilon_{ass} - \epsilon_{ox})$
- - $\delta^{15}N_{sed} = D * \delta^{15}N_d + (1-D) * \delta^{15}N_p$
- 
+$$
+\begin{aligned}
+\delta^{15}N_p &= \delta^{15}N_d + \epsilon_{premin} + (J_{ox}/J_{dremin})(\epsilon_{ass} - \epsilon_{ox}) \\
+\delta^{15}N_{sed} &= D * \delta^{15}N_d + (1-D) * \delta^{15}N_p
+\end{aligned}
+$$
+
 With parameters:
 
- - $r = J_{ass}/J_{premin}$
- - $D = J_{dbury}/(J_{dbury} + J_{pbury})$
- - $f_{ox} = J_{ox}/(J_{ass}+J_{ox})$
- 
+$$
+\begin{aligned}
+r &= J_{ass}/J_{premin} \\
+D &= J_{dbury}/(J_{dbury} + J_{pbury}) \\
+f_{ox} &= J_{ox}/(J_{ass}+J_{ox})
+\end{aligned}
+$$
+
 And individual fluxes: 
 
- - $k = ((D-1)/(((1-f_{ox})/f_{ox})*(r-1)-1+D))$ 
- - $J_{dbury} = J_{in}*(1-k)*D$
- - $J_{pbury} = J_{in}*(1-k)*(1-D)$
- - $J_{dremin} = J_{in}*(1-(1-k)*D)$
- - $J_{ass} = J_{in}*k*((1-f_{ox})/f_{ox})$
- - $J_{premin} = r*(J_{in}*k*((1-f_{ox})/f_{ox}))$
- - $J_{ox} = J_{in}*k$
+$$
+\begin{aligned}
+k &= ((D-1)/(((1-f_{ox})/f_{ox})*(r-1)-1+D)) \\
+J_{dbury} &= J_{in}*(1-k)*D \\
+J_{pbury} &= J_{in}*(1-k)*(1-D) \\
+J_{dremin} &= J_{in}*(1-(1-k)*D) \\
+J_{ass} &= J_{in}*k*((1-f_{ox})/f_{ox}) \\
+J_{premin} &= r*(J_{in}*k*((1-f_{ox})/f_{ox})) \\
+J_{ox} &= J_{in}*k
+\end{aligned}
+$$
  
  
 ## Default values (from paper)
 
- - $D = 0.2$
- - $r = 0.8$
- - $\epsilon_{ass} = -27$
- - $\epsilon_{ox} = -22$
- - $\delta^{15}N_d = -1$
+$$
+\begin{aligned}
+D &= 0.2 \\
+r &= 0.8 \\
+\epsilon_{ass} &= -27 \\
+\epsilon_{ox} &= -22 \\
+\delta^{15}N_d &= -1
+\end{aligned}
+$$
 
 
 # Let's see this in image form:
@@ -81,7 +96,7 @@ data1 <- expand.grid(
   )
 
 # show the data
-data1 %>% head() %>% knitr::kable()
+data1
 ```
 
 ## Visualize
@@ -149,7 +164,7 @@ data3 <- expand.grid(
     delta_sed = delta_diazotrophs + (1-D)*f_ox / (f_ox + (1-f_ox) * (1-r)) * (eps_ass - eps_ox)
   )
 
-data3 %>% head() %>% knitr::kable()
+data3
 ```
 
 ## Resulting contour plot
